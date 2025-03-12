@@ -225,6 +225,34 @@ class GUTV:
         self.label_ant_mp4_dep_stop                 = self.builder.get_object("label_ant_mp4_dep_stop")
         self.label_ant_mp4_dep_sys                  = self.builder.get_object("label_ant_mp4_dep_sys")
 
+        # EDC 1
+        self.label_edc1_date                        = self.builder.get_object("label_edc1_date")
+        self.label_edc1_time                        = self.builder.get_object("label_edc1_time")
+        self.label_edc1_elapsed_time                = self.builder.get_object("label_edc1_elapsed_time")
+        self.label_edc1_volt                        = self.builder.get_object("label_edc1_volt")
+        self.label_edc1_curr_dig                    = self.builder.get_object("label_edc1_curr_dig")
+        self.label_edc1_curr_ana                    = self.builder.get_object("label_edc1_curr_ana")
+        self.label_edc1_temp                        = self.builder.get_object("label_edc1_temp")
+        self.label_edc1_pll_sync                    = self.builder.get_object("label_edc1_pll_sync")
+        self.label_edc1_adc_rms_lvl                 = self.builder.get_object("label_edc1_adc_rms_lvl")
+        self.label_edc1_tot_ptt_pkg                 = self.builder.get_object("label_edc1_tot_ptt_pkg")
+        self.label_edc1_ptt_dec_ch                  = self.builder.get_object("label_edc1_ptt_dec_ch")
+        self.label_edc1_mss_err_count               = self.builder.get_object("label_edc1_mss_err_count")
+
+        # EDC 2
+        self.label_edc2_date                        = self.builder.get_object("label_edc2_date")
+        self.label_edc2_time                        = self.builder.get_object("label_edc2_time")
+        self.label_edc2_elapsed_time                = self.builder.get_object("label_edc2_elapsed_time")
+        self.label_edc2_volt                        = self.builder.get_object("label_edc2_volt")
+        self.label_edc2_curr_dig                    = self.builder.get_object("label_edc2_curr_dig")
+        self.label_edc2_curr_ana                    = self.builder.get_object("label_edc2_curr_ana")
+        self.label_edc2_temp                        = self.builder.get_object("label_edc2_temp")
+        self.label_edc2_pll_sync                    = self.builder.get_object("label_edc2_pll_sync")
+        self.label_edc2_adc_rms_lvl                 = self.builder.get_object("label_edc2_adc_rms_lvl")
+        self.label_edc2_tot_ptt_pkg                 = self.builder.get_object("label_edc2_tot_ptt_pkg")
+        self.label_edc2_ptt_dec_ch                  = self.builder.get_object("label_edc2_ptt_dec_ch")
+        self.label_edc2_mss_err_count               = self.builder.get_object("label_edc2_mss_err_count")
+
         # About dialog
         self.aboutdialog = self.builder.get_object("aboutdialog_gutv")
         self.aboutdialog.set_version(gutv.version.__version__)
@@ -702,6 +730,84 @@ class GUTV:
                 self.label_ant_mp4_dep_sys.set_text("Activated")
             else:
                 self.label_ant_mp4_dep_sys.set_text("Deactivated")
+
+        if "edc1_ts" in data:
+            self.label_edc1_date.set_text(datetime.datetime.fromtimestamp(int(data["edc1_ts"])).strftime('%Y/%m/%d'))
+            self.label_edc1_time.set_text(datetime.datetime.fromtimestamp(int(data["edc1_ts"])).strftime('%H:%M:%S'))
+
+        if "edc1_elapsed_tm" in data:
+            self.label_edc1_elapsed_time.set_text(data["edc1_elapsed_tm"] + " " + "sec")
+
+        if "edc1_volt" in data:
+            self.label_edc1_volt.set_text(data["edc1_volt"] + " " + "mV")
+
+        if "edc1_curr_dig" in data:
+            self.label_edc1_curr_dig.set_text(data["edc1_curr_dig"] + " " + "mA")
+
+        if "edc1_curr_ana" in data:
+            self.label_edc1_curr_ana.set_text(data["edc1_curr_ana"] + " " + "mA")
+
+        if "edc1_temp" in data:
+            self.label_edc1_temp.set_text(data["edc1_temp"] + " " + "°C")
+
+        if "edc1_pll_sync" in data:
+            if int(data["edc1_pll_sync"] == 0):
+                self.label_edc1_pll_sync.set_text("Disabled")
+            elif int(data["edc1_pll_sync"] == 0):
+                self.label_edc1_pll_sync.set_text("Enabled")
+            else:
+                self.label_edc1_pll_sync.set_text("Unknown")
+
+        if "edc1_adc_rms_lvl" in data:
+            self.label_edc1_adc_rms_lvl.set_text(data["edc1_adc_rms_lvl"])
+
+        if "edc1_tot_ptt_pkg" in data:
+            self.label_edc1_tot_ptt_pkg.set_text(data["edc1_tot_ptt_pkg"])
+
+        if "edc1_ptt_dec_ch" in data:
+            self.label_edc1_ptt_dec_ch.set_text(data["edc1_ptt_dec_ch"])
+
+        if "edc1_mss_err_count" in data:
+            self.label_edc1_mss_err_count.set_text(data["edc1_mss_err_count"])
+
+        if "edc2_ts" in data:
+            self.label_edc1_date.set_text(datetime.datetime.fromtimestamp(int(data["edc2_ts"])).strftime('%Y/%m/%d'))
+            self.label_edc1_time.set_text(datetime.datetime.fromtimestamp(int(data["edc2_ts"])).strftime('%H:%M:%S'))
+
+        if "edc2_elapsed_tm" in data:
+            self.label_edc1_elapsed_time.set_text(data["edc2_elapsed_tm"] + " " + "sec")
+
+        if "edc2_volt" in data:
+            self.label_edc1_volt.set_text(data["edc2_volt"] + " " + "mV")
+
+        if "edc2_curr_dig" in data:
+            self.label_edc1_curr_dig.set_text(data["edc2_curr_dig"] + " " + "mA")
+
+        if "edc2_curr_ana" in data:
+            self.label_edc1_curr_ana.set_text(data["edc2_curr_ana"] + " " + "mA")
+
+        if "edc2_temp" in data:
+            self.label_edc1_temp.set_text(data["edc2_temp"] + " " + "°C")
+
+        if "edc2_pll_sync" in data:
+            if int(data["edc2_pll_sync"] == 0):
+                self.label_edc1_pll_sync.set_text("Disabled")
+            elif int(data["edc2_pll_sync"] == 0):
+                self.label_edc1_pll_sync.set_text("Enabled")
+            else:
+                self.label_edc1_pll_sync.set_text("Unknown")
+
+        if "edc2_adc_rms_lvl" in data:
+            self.label_edc1_adc_rms_lvl.set_text(data["edc2_adc_rms_lvl"])
+
+        if "edc2_tot_ptt_pkg" in data:
+            self.label_edc1_tot_ptt_pkg.set_text(data["edc2_tot_ptt_pkg"])
+
+        if "edc2_ptt_dec_ch" in data:
+            self.label_edc1_ptt_dec_ch.set_text(data["edc2_ptt_dec_ch"])
+
+        if "edc2_mss_err_count" in data:
+            self.label_edc1_mss_err_count.set_text(data["edc2_mss_err_count"])
 
     def _load_default_values_eps(self):
         self.label_eps_mcu_date.set_text("1970/01/01")
